@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CafayateRouteImport } from './routes/cafayate'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as ExperienciaRouteImport } from './routes/experiencia'
+import { Route as BarricasIndexRouteImport } from './routes/barricas.index'
+import { Route as BarricasSlugRouteImport } from './routes/barricas.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CafayateRoute = CafayateRouteImport.update({
+  id: '/cafayate',
+  path: '/cafayate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienciaRoute = ExperienciaRouteImport.update({
+  id: '/experiencia',
+  path: '/experiencia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BarricasIndexRoute = BarricasIndexRouteImport.update({
+  id: '/barricas/',
+  path: '/barricas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BarricasSlugRoute = BarricasSlugRouteImport.update({
+  id: '/barricas/$slug',
+  path: '/barricas/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cafayate': typeof CafayateRoute
+  '/contacto': typeof ContactoRoute
+  '/experiencia': typeof ExperienciaRoute
+  '/barricas/$slug': typeof BarricasSlugRoute
+  '/barricas/': typeof BarricasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cafayate': typeof CafayateRoute
+  '/contacto': typeof ContactoRoute
+  '/experiencia': typeof ExperienciaRoute
+  '/barricas/$slug': typeof BarricasSlugRoute
+  '/barricas': typeof BarricasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cafayate': typeof CafayateRoute
+  '/contacto': typeof ContactoRoute
+  '/experiencia': typeof ExperienciaRoute
+  '/barricas/$slug': typeof BarricasSlugRoute
+  '/barricas/': typeof BarricasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/cafayate'
+    | '/contacto'
+    | '/experiencia'
+    | '/barricas/$slug'
+    | '/barricas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/cafayate'
+    | '/contacto'
+    | '/experiencia'
+    | '/barricas/$slug'
+    | '/barricas'
+  id:
+    | '__root__'
+    | '/'
+    | '/cafayate'
+    | '/contacto'
+    | '/experiencia'
+    | '/barricas/$slug'
+    | '/barricas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CafayateRoute: typeof CafayateRoute
+  ContactoRoute: typeof ContactoRoute
+  ExperienciaRoute: typeof ExperienciaRoute
+  BarricasSlugRoute: typeof BarricasSlugRoute
+  BarricasIndexRoute: typeof BarricasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cafayate': {
+      id: '/cafayate'
+      path: '/cafayate'
+      fullPath: '/cafayate'
+      preLoaderRoute: typeof CafayateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiencia': {
+      id: '/experiencia'
+      path: '/experiencia'
+      fullPath: '/experiencia'
+      preLoaderRoute: typeof ExperienciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/barricas/': {
+      id: '/barricas/'
+      path: '/barricas'
+      fullPath: '/barricas/'
+      preLoaderRoute: typeof BarricasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/barricas/$slug': {
+      id: '/barricas/$slug'
+      path: '/barricas/$slug'
+      fullPath: '/barricas/$slug'
+      preLoaderRoute: typeof BarricasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CafayateRoute: CafayateRoute,
+  ContactoRoute: ContactoRoute,
+  ExperienciaRoute: ExperienciaRoute,
+  BarricasSlugRoute: BarricasSlugRoute,
+  BarricasIndexRoute: BarricasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
