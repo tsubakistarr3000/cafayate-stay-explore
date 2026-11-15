@@ -4,7 +4,7 @@ import { accommodations, site } from "@/data/site";
 import { buildInquiryMessage, validateInquiry, whatsappUrl } from "@/lib/inquiry";
 
 export function InquiryForm({ defaultUnit, compact = false }: { defaultUnit?: string; compact?: boolean }) {
-  const [unit, setUnit] = useState(defaultUnit ?? accommodations[0].name);
+  const [unit, setUnit] = useState(defaultUnit ?? accommodations[0]!.name);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(2);

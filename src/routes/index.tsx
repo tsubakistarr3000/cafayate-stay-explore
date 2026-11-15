@@ -128,9 +128,9 @@ function Units() {
         </div>
         <div className="mt-24 grid gap-24 md:grid-cols-12 md:gap-y-32">
           {accommodations.map((a, k) => (
-            <Reveal key={a.id} className={layouts[k].wrap}>
+            <Reveal key={a.id} className={layouts[k]!.wrap}>
               <Link to="/barricas/$slug" params={{ slug: a.slug }} className="group block">
-                <div className={`img-zoom relative ${layouts[k].ratio}`}>
+                <div className={`img-zoom relative ${layouts[k]!.ratio}`}>
                   <img src={a.heroImage.src} alt={a.heroImage.alt} className="h-full w-full object-cover" loading="lazy" />
                   {a.provisional && <span className="label-meta absolute left-4 top-4 bg-paper px-3 py-2 text-[10px]">Imagen y nombre provisorios</span>}
                 </div>
