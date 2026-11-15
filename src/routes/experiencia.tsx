@@ -38,8 +38,8 @@ function Experiencia() {
               <Reveal as="p" delay={120} className="mt-6 max-w-sm text-muted-foreground">{c.text}</Reveal>
             </div>
             <div className={`grid grid-cols-5 gap-6 md:col-span-7 ${k % 2 ? "md:col-start-1" : "md:col-start-6"}`}>
-              <Reveal variant="img" className="col-span-3 aspect-[3/4] overflow-hidden"><img src={c.photos[0].src} alt={c.photos[0].alt} className="h-full w-full object-cover" loading="lazy" /></Reveal>
-              <Reveal variant="img" delay={200} className="col-span-2 mt-28 aspect-[3/4] overflow-hidden"><img src={c.photos[1].src} alt={c.photos[1].alt} className="h-full w-full object-cover" loading="lazy" /></Reveal>
+              <Reveal variant="img" className="col-span-3 aspect-[3/4] overflow-hidden"><img src={c.photos[0]!.src} alt={c.photos[0]!.alt} className="h-full w-full object-cover" loading="lazy" /></Reveal>
+              <Reveal variant="img" delay={200} className="col-span-2 mt-28 aspect-[3/4] overflow-hidden"><img src={c.photos[1]!.src} alt={c.photos[1]!.alt} className="h-full w-full object-cover" loading="lazy" /></Reveal>
             </div>
           </div>
         </section>

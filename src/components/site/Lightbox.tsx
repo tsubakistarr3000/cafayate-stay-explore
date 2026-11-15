@@ -18,17 +18,17 @@ export function Lightbox({ photos, index, onClose }: { photos: Photo[]; index: n
     return () => { window.removeEventListener("keydown", on); document.body.style.overflow = ""; };
   }, [index, photos.length, onClose]);
   if (index === null) return null;
-  const ph = photos[i];
+  const ph = photos[i]!;
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Galería de fotos"
       className="fixed inset-0 z-[60] flex items-center justify-center bg-charcoal/95 text-on-dark animate-in fade-in duration-300"
-      onTouchStart={(e) => (touch.current = e.touches[0].clientX)}
+      onTouchStart={(e) => (touch.current = e.touches[0]!.clientX)}
       onTouchEnd={(e) => {
         if (touch.current === null) return;
-        const dx = e.changedTouches[0].clientX - touch.current;
+        const dx = e.changedTouches[0]!.clientX - touch.current;
         if (Math.abs(dx) > 40) setI((v) => (v + (dx < 0 ? 1 : -1) + photos.length) % photos.length);
         touch.current = null;
       }}
