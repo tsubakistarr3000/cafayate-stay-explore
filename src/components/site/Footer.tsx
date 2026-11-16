@@ -16,6 +16,7 @@ export function Footer() {
             <li><Link to="/barricas" className="opacity-80 hover:opacity-100">Las Barricas</Link></li>
             <li><Link to="/experiencia" className="opacity-80 hover:opacity-100">La Experiencia</Link></li>
             <li><Link to="/cafayate" className="opacity-80 hover:opacity-100">Cafayate</Link></li>
+            <li><Link to="/reservas" className="opacity-80 hover:opacity-100">Reservas en Airbnb y Booking</Link></li>
             <li><Link to="/contacto" className="opacity-80 hover:opacity-100">Contacto</Link></li>
           </ul>
         </div>

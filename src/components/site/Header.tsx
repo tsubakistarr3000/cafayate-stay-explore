@@ -6,6 +6,7 @@ const nav = [
   { to: "/barricas", label: "Las Barricas" },
   { to: "/experiencia", label: "La Experiencia" },
   { to: "/cafayate", label: "Cafayate" },
+  { to: "/reservas", label: "Reservas" },
   { to: "/contacto", label: "Contacto" },
 ] as const;
 
@@ -53,8 +54,8 @@ export function Header() {
             ))}
           </nav>
           <div className="flex shrink-0 items-center gap-5">
-            <Link to="/contacto" className="label-meta hidden border-b border-current pb-1 sm:inline-block">
-              Consultar
+            <Link to="/reservas" className="label-meta hidden border-b border-current pb-1 sm:inline-block">
+              Reservar
             </Link>
             <button
               onClick={() => setOpen((o) => !o)}

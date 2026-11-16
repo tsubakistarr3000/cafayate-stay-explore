@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { img, video } from "@/data/media";
-import { accommodations } from "@/data/site";
+import { accommodations, site } from "@/data/site";
 import { Reveal, useParallax } from "@/components/site/Reveal";
 import { BarrelReveal } from "@/components/site/BarrelReveal";
 import { VideoFrame } from "@/components/site/VideoFrame";
@@ -52,7 +52,7 @@ function Hero() {
             <p className="mt-5 max-w-md text-lg opacity-90">Viví Cafayate de otra manera.</p>
             <div className="mt-9 flex flex-wrap gap-4">
               <Magnetic><Link to="/barricas" className="btn-light">Descubrí Barricas</Link></Magnetic>
-              <Link to="/contacto" className="link-line label-meta self-center">Consultar estadía <ArrowRight className="h-3.5 w-3.5" /></Link>
+              <Link to="/reservas" className="link-line label-meta self-center">Reservar estadía <ArrowRight className="h-3.5 w-3.5" /></Link>
             </div>
           </div>
           <div className="hidden flex-col items-end gap-3 md:col-span-5 md:flex">
@@ -249,10 +249,11 @@ function Cta() {
     <section className="bg-sand py-32 md:py-40">
       <div className="container-editorial text-center">
         <Reveal as="h2" className="display-serif mx-auto max-w-4xl text-[clamp(40px,6vw,96px)]"><Split>Tu próxima estadía puede ser diferente.</Split></Reveal>
-        <Reveal as="p" delay={120} className="mx-auto mt-8 max-w-md text-muted-foreground">Elegí tus fechas y consultanos por tu visita a Barricas de Cafayate.</Reveal>
-        <Reveal delay={200} className="mt-12 flex flex-wrap justify-center gap-4">
-          <Magnetic><Link to="/contacto" className="btn-solid">Consultar disponibilidad</Link></Magnetic>
-          <Magnetic><Link to="/barricas" className="btn-ghost">Ver alojamientos</Link></Magnetic>
+        <Reveal as="p" delay={120} className="mx-auto mt-8 max-w-md text-muted-foreground">Reservá en tu plataforma habitual. La disponibilidad, las tarifas y el pago se gestionan allí.</Reveal>
+        <Reveal delay={200} className="mt-12 flex flex-wrap items-center justify-center gap-4">
+          <Magnetic><Link to="/reservas" hash="airbnb" className="btn-solid">Reservar en Airbnb</Link></Magnetic>
+          <Magnetic><a href={site.bookingUrl || site.bookingSearchUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">{site.bookingUrl ? "Reservar en Booking" : "Buscar en Booking"} <ArrowUpRight className="h-4 w-4" strokeWidth={1.25} /></a></Magnetic>
+          <Link to="/contacto" className="link-line label-meta ml-2">Hacer una consulta</Link>
         </Reveal>
       </div>
     </section>

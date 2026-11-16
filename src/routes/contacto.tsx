@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { accommodations, site } from "@/data/site";
 import { img } from "@/data/media";
@@ -28,6 +28,10 @@ function Contacto() {
         <p className="label-meta text-muted-foreground">Contacto · Consultas</p>
         <h1 className="display-serif mt-5 text-6xl md:text-7xl">Consultá tu estadía.</h1>
         <p className="mt-6 max-w-md text-muted-foreground">Contanos tus fechas y te respondemos con disponibilidad y tarifa.</p>
+        <div className="mt-10 max-w-lg border-y border-border py-6">
+          <p className="label-meta text-muted-foreground">¿Ya elegiste tu barrica?</p>
+          <Link to="/reservas" className="link-line label-meta mt-3">Reservar en Airbnb o Booking <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+        </div>
         <div className="mt-14 max-w-lg"><InquiryForm /></div>
 
         <div className="mt-20 grid max-w-lg gap-10 border-t border-border pt-10 sm:grid-cols-2">
