@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CafayateRouteImport } from './routes/cafayate'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as ExperienciaRouteImport } from './routes/experiencia'
+import { Route as ReservasRouteImport } from './routes/reservas'
 import { Route as BarricasIndexRouteImport } from './routes/barricas.index'
 import { Route as BarricasSlugRouteImport } from './routes/barricas.$slug'
 
@@ -36,6 +37,11 @@ const ExperienciaRoute = ExperienciaRouteImport.update({
   path: '/experiencia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReservasRoute = ReservasRouteImport.update({
+  id: '/reservas',
+  path: '/reservas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BarricasIndexRoute = BarricasIndexRouteImport.update({
   id: '/barricas/',
   path: '/barricas/',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/cafayate': typeof CafayateRoute
   '/contacto': typeof ContactoRoute
   '/experiencia': typeof ExperienciaRoute
+  '/reservas': typeof ReservasRoute
   '/barricas/$slug': typeof BarricasSlugRoute
   '/barricas/': typeof BarricasIndexRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/cafayate': typeof CafayateRoute
   '/contacto': typeof ContactoRoute
   '/experiencia': typeof ExperienciaRoute
+  '/reservas': typeof ReservasRoute
   '/barricas/$slug': typeof BarricasSlugRoute
   '/barricas': typeof BarricasIndexRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/cafayate': typeof CafayateRoute
   '/contacto': typeof ContactoRoute
   '/experiencia': typeof ExperienciaRoute
+  '/reservas': typeof ReservasRoute
   '/barricas/$slug': typeof BarricasSlugRoute
   '/barricas/': typeof BarricasIndexRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/cafayate'
     | '/contacto'
     | '/experiencia'
+    | '/reservas'
     | '/barricas/$slug'
     | '/barricas/'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/cafayate'
     | '/contacto'
     | '/experiencia'
+    | '/reservas'
     | '/barricas/$slug'
     | '/barricas'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/cafayate'
     | '/contacto'
     | '/experiencia'
+    | '/reservas'
     | '/barricas/$slug'
     | '/barricas/'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   CafayateRoute: typeof CafayateRoute
   ContactoRoute: typeof ContactoRoute
   ExperienciaRoute: typeof ExperienciaRoute
+  ReservasRoute: typeof ReservasRoute
   BarricasSlugRoute: typeof BarricasSlugRoute
   BarricasIndexRoute: typeof BarricasIndexRoute
 }
@@ -138,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExperienciaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reservas': {
+      id: '/reservas'
+      path: '/reservas'
+      fullPath: '/reservas'
+      preLoaderRoute: typeof ReservasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/barricas/': {
       id: '/barricas/'
       path: '/barricas'
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   CafayateRoute: CafayateRoute,
   ContactoRoute: ContactoRoute,
   ExperienciaRoute: ExperienciaRoute,
+  ReservasRoute: ReservasRoute,
   BarricasSlugRoute: BarricasSlugRoute,
   BarricasIndexRoute: BarricasIndexRoute,
 }

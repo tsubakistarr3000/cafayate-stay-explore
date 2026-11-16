@@ -92,15 +92,21 @@ function Unit() {
           <p className="mt-4 text-xs text-muted-foreground">Las comodidades pueden variar. Confirmá los detalles al consultar.</p>
         </div>
         <aside className="bg-ivory p-8 md:col-span-5 md:col-start-8 md:p-12">
-          <p className="label-meta text-muted-foreground">Consulta directa</p>
+          <p className="label-meta text-muted-foreground">Reserva en plataformas externas</p>
           <h2 className="display-serif mb-8 mt-3 text-4xl">Reservar {a.name}</h2>
-          <InquiryForm defaultUnit={a.name} compact />
-          {a.airbnbUrl && (
-            <div className="mt-8 border-t border-border pt-6">
-              <p className="mb-3 text-xs text-muted-foreground">También podés reservar a través de una plataforma externa:</p>
-              <a href={a.airbnbUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost w-full">Ver en Airbnb <ArrowUpRight className="h-4 w-4" strokeWidth={1.25} /></a>
-            </div>
-          )}
+          <div className="space-y-3">
+            {a.airbnbUrl && (
+              <a href={a.airbnbUrl} target="_blank" rel="noopener noreferrer" className="btn-solid w-full">Reservar en Airbnb <ArrowUpRight className="h-4 w-4" strokeWidth={1.25} /></a>
+            )}
+            <a href={site.bookingUrl || site.bookingSearchUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost w-full">
+              {site.bookingUrl ? "Reservar en Booking" : "Buscar en Booking"} <ArrowUpRight className="h-4 w-4" strokeWidth={1.25} />
+            </a>
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground">La disponibilidad, las tarifas y el pago se gestionan en la plataforma elegida.</p>
+          <div className="mt-10 border-t border-border pt-8">
+            <p className="label-meta mb-6 text-muted-foreground">¿Preferís consultar primero?</p>
+            <InquiryForm defaultUnit={a.name} compact />
+          </div>
         </aside>
       </section>
 

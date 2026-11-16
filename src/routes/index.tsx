@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { img, video } from "@/data/media";
 import { accommodations } from "@/data/site";
 import { Reveal, useParallax } from "@/components/site/Reveal";
