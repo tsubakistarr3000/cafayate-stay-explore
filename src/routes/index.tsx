@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { img, video } from "@/data/media";
-import { accommodations } from "@/data/site";
+import { accommodations, site } from "@/data/site";
 import { Reveal, useParallax } from "@/components/site/Reveal";
 import { BarrelReveal } from "@/components/site/BarrelReveal";
 import { VideoFrame } from "@/components/site/VideoFrame";
