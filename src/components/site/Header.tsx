@@ -6,6 +6,7 @@ const nav = [
   { to: "/barricas", label: "Las Barricas" },
   { to: "/experiencia", label: "La Experiencia" },
   { to: "/cafayate", label: "Cafayate" },
+  { to: "/reservas", label: "Reservas" },
   { to: "/contacto", label: "Contacto" },
 ] as const;
 

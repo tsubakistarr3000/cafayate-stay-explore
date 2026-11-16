@@ -8,6 +8,8 @@ export const site = {
   whatsappNumber: "", // formato internacional sin "+", ej. 5493868000000 — a confirmar
   email: "", // a confirmar
   instagramUrl: "", // a confirmar
+  bookingUrl: "", // enlace directo a la ficha del alojamiento — a confirmar
+  bookingSearchUrl: "https://www.booking.com/searchresults.es.html?ss=Barricas%20de%20Cafayate%2C%20Cafayate%2C%20Salta%2C%20Argentina",
   checkInTime: "", // a confirmar
   checkOutTime: "", // a confirmar
   coordinates: "26°04′S · 65°58′O",
