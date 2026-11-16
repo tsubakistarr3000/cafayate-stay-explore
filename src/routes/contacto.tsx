@@ -30,7 +30,7 @@ function Contacto() {
         <p className="mt-6 max-w-md text-muted-foreground">Contanos tus fechas y te respondemos con disponibilidad y tarifa.</p>
         <div className="mt-10 max-w-lg border-y border-border py-6">
           <p className="label-meta text-muted-foreground">¿Ya elegiste tu barrica?</p>
-          <a href="/reservas" className="link-line label-meta mt-3">Reservar en Airbnb o Booking <ArrowUpRight className="h-3.5 w-3.5" /></a>
+          <Link to="/reservas" className="link-line label-meta mt-3">Reservar en Airbnb o Booking <ArrowUpRight className="h-3.5 w-3.5" /></Link>
         </div>
         <div className="mt-14 max-w-lg"><InquiryForm /></div>
 
