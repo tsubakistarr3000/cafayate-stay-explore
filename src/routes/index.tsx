@@ -111,7 +111,7 @@ function Signature() {
               <p className="label-meta mb-4 opacity-70">Bóvedas · Madera · Luz</p>
               <h2 className="display-sans text-[clamp(44px,10vw,160px)] leading-[0.88]">Una arquitectura<br /><span className="font-light italic">para recordar.</span></h2>
             </div>
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/80 to-transparent pt-40" style={{ opacity: "calc((var(--t) - 0.55) * 3)" }}>
+            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-charcoal/80 to-transparent pt-40" style={{ opacity: "calc((var(--t) - 0.55) * 3)" }}>
               <div className="container-editorial grid gap-6 pb-14 md:grid-cols-12">
                 <p className="label-meta md:col-span-3">El conjunto · Cafayate</p>
                 <p className="text-xl leading-snug md:col-span-7 md:text-3xl">Cada habitación toma la silueta curva de una barrica de vino: una bóveda blanca, un frente de madera y un interior recogido que invita a quedarse.</p>
