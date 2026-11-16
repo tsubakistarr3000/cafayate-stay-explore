@@ -45,7 +45,7 @@ function Cafayate() {
         <Reveal variant="img" className="aspect-[4/5] overflow-hidden md:col-span-6"><img src={img.cafayateVinedos.src} alt={img.cafayateVinedos.alt} className="h-full w-full object-cover" loading="lazy" /></Reveal>
         <div className="flex flex-col justify-end md:col-span-5 md:col-start-8">
           <SectionIndex n="03" label="Cultura del vino" className="text-muted-foreground" />
-          <Reveal as="h2" className="display-sans mt-8 text-[clamp(40px,5vw,72px)]">Tierra de <span className="display-serif italic text-terracotta">torrontés.</span></Reveal>
+          <Reveal as="h2" className="display-sans mt-8 text-[clamp(40px,5vw,72px)]">Tierra de <span className="font-light italic text-terracotta">torrontés.</span></Reveal>
           <Reveal as="p" delay={120} className="mt-6 max-w-md text-muted-foreground">Bodegas familiares y de altura rodean el pueblo. Muchas abren sus puertas para visitas y degustaciones, que se coordinan directamente con cada una.</Reveal>
         </div>
       </section>

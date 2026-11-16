@@ -67,7 +67,7 @@ function Unit() {
         {g.map((ph, k) => {
           const span = ["md:col-span-7 aspect-[4/3]", "md:col-span-5 aspect-[4/5] md:mt-24", "md:col-span-4 aspect-[3/4]", "md:col-span-4 aspect-[3/4] md:mt-16", "md:col-span-4 aspect-[3/4]", "md:col-span-6 md:col-start-4 aspect-[4/3]"][k % 6];
           return (
-            <button key={ph.src} onClick={() => setOpen(k)} className={`img-zoom relative block ${span}`} aria-label={`Ampliar: ${ph.alt}`}>
+            <button key={ph.src} onClick={() => setOpen(k)} className={`img-zoom relative block ${span}`} data-cursor="Ampliar" aria-label={`Ampliar: ${ph.alt}`}>
               <img src={ph.src} alt={ph.alt} className="h-full w-full object-cover" loading="lazy" />
             </button>
           );
