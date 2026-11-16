@@ -7,6 +7,8 @@ import { Reveal, useParallax } from "@/components/site/Reveal";
 import { BarrelReveal } from "@/components/site/BarrelReveal";
 import { VideoFrame } from "@/components/site/VideoFrame";
 import { SectionIndex } from "@/components/site/SectionIndex";
+import { Marquee, Split, Magnetic } from "@/components/site/Fx";
+import { Tour } from "@/components/site/Tour";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,24 +28,30 @@ const heroSlides = [img.exteriorBarricas, img.exteriorLavanda, img.rosadoCamas];
 
 function Hero() {
   const [i, setI] = useState(0);
+  const [m, setM] = useState({ x: 0, y: 0 });
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % heroSlides.length), 7000);
     return () => clearInterval(t);
   }, []);
   return (
-    <section className="relative h-svh min-h-[620px] overflow-hidden bg-charcoal text-on-dark">
-      {heroSlides.map((s, k) => (
-        <img key={s.src} src={s.src} alt={s.alt} className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[2000ms] ${k === i ? "opacity-100 animate-kenburns" : "opacity-0"}`} />
-      ))}
+    <section
+      className="relative h-svh min-h-[620px] overflow-hidden bg-charcoal text-on-dark"
+      onMouseMove={(e) => setM({ x: e.clientX / window.innerWidth - 0.5, y: e.clientY / window.innerHeight - 0.5 })}
+    >
+      <div className="absolute -inset-8 transition-transform duration-[1200ms] ease-out" style={{ transform: `translate3d(${m.x * -24}px, ${m.y * -16}px, 0)` }}>
+        {heroSlides.map((s, k) => (
+          <img key={s.src} src={s.src} alt={s.alt} className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[2000ms] ${k === i ? "opacity-100 animate-kenburns" : "opacity-0"}`} />
+        ))}
+      </div>
       <div className="hero-shade absolute inset-0" />
       <div className="container-editorial relative flex h-full flex-col justify-end pb-16 md:pb-20">
         <div className="grid items-end gap-10 md:grid-cols-12">
           <div className="md:col-span-7">
             <p className="label-meta animate-in fade-in slide-in-from-bottom-3 duration-1000">Cafayate · Salta · Argentina</p>
-            <h1 className="display-serif mt-5 text-[clamp(44px,6vw,80px)] animate-in fade-in slide-in-from-bottom-4 duration-1000">Dormí dentro<br />de una barrica.</h1>
+            <Reveal as="h1" className="display-serif mt-5 text-[clamp(40px,6vw,84px)]"><Split>{"Dormí dentro\nde una barrica."}</Split></Reveal>
             <p className="mt-5 max-w-md text-lg opacity-90">Viví Cafayate de otra manera.</p>
             <div className="mt-9 flex flex-wrap gap-4">
-              <Link to="/barricas" className="btn-light">Descubrí Barricas</Link>
+              <Magnetic><Link to="/barricas" className="btn-light">Descubrí Barricas</Link></Magnetic>
               <Link to="/contacto" className="link-line label-meta self-center">Consultar estadía <ArrowRight className="h-3.5 w-3.5" /></Link>
             </div>
           </div>
@@ -72,7 +80,7 @@ function Manifesto() {
       <div className="container-editorial grid gap-14 md:grid-cols-12">
         <div className="md:col-span-2"><SectionIndex n="01" label="Una forma diferente" className="text-muted-foreground" /></div>
         <div className="md:col-span-5">
-          <Reveal as="h2" className="display-sans text-[clamp(40px,5vw,72px)]">No todas las estadías se parecen.</Reveal>
+          <Reveal as="h2" className="display-sans text-[clamp(36px,5vw,72px)]"><Split>No todas las estadías se parecen.</Split></Reveal>
           <Reveal as="p" delay={150} className="mt-10 max-w-md text-muted-foreground">
             En Cafayate, donde el vino forma parte de la identidad del lugar, nuestras barricas ofrecen una manera diferente de descansar y descubrir el destino.
           </Reveal>
@@ -80,7 +88,7 @@ function Manifesto() {
         </div>
         <div className="md:col-span-4 md:col-start-9 md:mt-32">
           <div ref={par}>
-            <Reveal variant="img" className="aspect-[3/4] overflow-hidden barrel-arch">
+            <Reveal variant="img" className="aspect-[3/4] overflow-hidden barrel-arch" >
               <img src={img.exteriorBarrica.src} alt={img.exteriorBarrica.alt} className="h-full w-full object-cover" />
             </Reveal>
           </div>
@@ -94,19 +102,37 @@ function Manifesto() {
 function Signature() {
   return (
     <section className="relative bg-wine text-on-dark">
-      <div className="container-editorial pointer-events-none absolute inset-x-0 top-0 z-10 pt-28">
-        <h2 className="display-sans text-[clamp(56px,11vw,180px)] leading-[0.85] mix-blend-difference">Una arquitectura<br /><span className="display-serif italic">para recordar.</span></h2>
-      </div>
-      <BarrelReveal src={img.vistaConjunto.src} alt={img.vistaConjunto.alt} />
-      <div className="container-editorial grid gap-10 py-24 md:grid-cols-12">
-        <p className="label-meta md:col-span-3 opacity-60">Bóvedas · Madera · Luz</p>
-        <Reveal as="p" className="text-2xl leading-snug md:col-span-6 md:text-3xl">
-          Cada habitación toma la silueta curva de una barrica de vino: una bóveda blanca, un frente de madera y un interior recogido que invita a quedarse.
-        </Reveal>
-      </div>
+      <BarrelReveal
+        src={img.vistaConjunto.src}
+        alt={img.vistaConjunto.alt}
+        overlay={
+          <>
+            <div className="container-editorial pointer-events-none absolute inset-x-0 top-24 md:top-28" style={{ opacity: "calc(1 - var(--t) * 2.2)", transform: "translateY(calc(var(--t) * -120px))" }}>
+              <p className="label-meta mb-4 opacity-70">Bóvedas · Madera · Luz</p>
+              <h2 className="display-sans text-[clamp(44px,10vw,160px)] leading-[0.88]">Una arquitectura<br /><span className="font-light italic">para recordar.</span></h2>
+            </div>
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/80 to-transparent pt-40" style={{ opacity: "calc((var(--t) - 0.55) * 3)" }}>
+              <div className="container-editorial grid gap-6 pb-14 md:grid-cols-12">
+                <p className="label-meta md:col-span-3">El conjunto · Cafayate</p>
+                <p className="text-xl leading-snug md:col-span-7 md:text-3xl">Cada habitación toma la silueta curva de una barrica de vino: una bóveda blanca, un frente de madera y un interior recogido que invita a quedarse.</p>
+              </div>
+            </div>
+          </>
+        }
+      />
     </section>
   );
 }
+
+const tourStops = [
+  { title: "La llegada", text: "El conjunto de barricas aparece desde la calle, bajo el cielo abierto del valle.", photo: img.vistaConjunto },
+  { title: "El sendero", text: "Un camino de piedra y canto rodado conecta cada unidad.", photo: img.sendero },
+  { title: "La puerta", text: "Frentes de madera y un tonel de roble marcan cada entrada.", photo: img.exteriorBarrica },
+  { title: "Adentro", text: "Bóveda encalada, muro de color y dos camas para descansar.", photo: img.rosadoCamas },
+  { title: "El baño privado", text: "Cada barrica tiene su propio baño.", photo: img.rosadoBano },
+  { title: "La galería", text: "Cocina y parrilla compartidas para el final del día.", photo: img.cocinaExterior },
+  { title: "La noche", text: "El cielo se tiñe de rosa sobre los cerros.", photo: img.cieloNoche },
+];
 
 const layouts = [
   { wrap: "md:col-span-7", ratio: "aspect-[4/3]" },
@@ -122,14 +148,14 @@ function Units() {
         <div className="grid gap-10 md:grid-cols-12">
           <SectionIndex n="02" label="Las barricas" className="text-muted-foreground md:col-span-3" />
           <div className="md:col-span-8">
-            <Reveal as="h2" className="display-sans text-[clamp(40px,5vw,72px)]">Cuatro espacios.<br /><span className="display-serif italic text-terracotta">Una experiencia diferente.</span></Reveal>
+            <Reveal as="h2" className="display-sans text-[clamp(36px,5vw,72px)]"><Split>{"Cuatro espacios."}</Split><br /><span className="font-light italic text-terracotta"><Split>Una experiencia diferente.</Split></span></Reveal>
             <Reveal as="p" delay={120} className="mt-8 max-w-lg text-muted-foreground">Descubrí nuestras habitaciones privadas con una arquitectura inspirada en las barricas de vino.</Reveal>
           </div>
         </div>
         <div className="mt-24 grid gap-24 md:grid-cols-12 md:gap-y-32">
           {accommodations.map((a, k) => (
             <Reveal key={a.id} className={layouts[k]!.wrap}>
-              <Link to="/barricas/$slug" params={{ slug: a.slug }} className="group block">
+              <Link to="/barricas/$slug" params={{ slug: a.slug }} className="group block" data-cursor="Explorar">
                 <div className={`img-zoom relative ${layouts[k]!.ratio}`}>
                   <img src={a.heroImage.src} alt={a.heroImage.alt} className="h-full w-full object-cover" loading="lazy" />
                   {a.provisional && <span className="label-meta absolute left-4 top-4 bg-paper px-3 py-2 text-[10px]">Imagen y nombre provisorios</span>}
@@ -222,11 +248,11 @@ function Cta() {
   return (
     <section className="bg-sand py-32 md:py-40">
       <div className="container-editorial text-center">
-        <Reveal as="h2" className="display-serif mx-auto max-w-4xl text-[clamp(44px,6vw,96px)]">Tu próxima estadía puede ser diferente.</Reveal>
+        <Reveal as="h2" className="display-serif mx-auto max-w-4xl text-[clamp(40px,6vw,96px)]"><Split>Tu próxima estadía puede ser diferente.</Split></Reveal>
         <Reveal as="p" delay={120} className="mx-auto mt-8 max-w-md text-muted-foreground">Elegí tus fechas y consultanos por tu visita a Barricas de Cafayate.</Reveal>
         <Reveal delay={200} className="mt-12 flex flex-wrap justify-center gap-4">
-          <Link to="/contacto" className="btn-solid">Consultar disponibilidad</Link>
-          <Link to="/barricas" className="btn-ghost">Ver alojamientos</Link>
+          <Magnetic><Link to="/contacto" className="btn-solid">Consultar disponibilidad</Link></Magnetic>
+          <Magnetic><Link to="/barricas" className="btn-ghost">Ver alojamientos</Link></Magnetic>
         </Reveal>
       </div>
     </section>
@@ -234,5 +260,17 @@ function Cta() {
 }
 
 function Home() {
-  return (<><Hero /><Manifesto /><Signature /><Units /><Experience /><Destination /><Cta /></>);
+  return (
+    <>
+      <Hero />
+      <Manifesto />
+      <Signature />
+      <Tour heading="Caminá por las barricas." stops={tourStops} />
+      <Units />
+      <Marquee items={["Malbec", "Cabernet", "Rosado", "Cafayate", "Valles Calchaquíes"]} className="bg-paper" />
+      <Experience />
+      <Destination />
+      <Cta />
+    </>
+  );
 }

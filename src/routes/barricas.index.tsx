@@ -28,7 +28,7 @@ function Collection() {
           const flip = k % 2 === 1;
           return (
             <Reveal key={a.id} as="article" className="grid gap-10 border-t border-border py-20 md:grid-cols-12 md:py-28">
-              <Link to="/barricas/$slug" params={{ slug: a.slug }} className={`img-zoom relative block aspect-[4/5] md:col-span-6 ${flip ? "md:order-2 md:col-start-7" : ""}`}>
+              <Link to="/barricas/$slug" params={{ slug: a.slug }} data-cursor="Explorar" className={`img-zoom relative block aspect-[4/5] md:col-span-6 ${flip ? "md:order-2 md:col-start-7" : ""}`}>
                 <img src={a.heroImage.src} alt={a.heroImage.alt} className="h-full w-full object-cover" loading="lazy" />
                 {a.provisional && <span className="label-meta absolute left-4 top-4 bg-paper px-3 py-2 text-[10px]">Provisorio</span>}
               </Link>
