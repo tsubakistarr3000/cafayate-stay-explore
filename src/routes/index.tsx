@@ -252,7 +252,7 @@ function Cta() {
         <Reveal as="p" delay={120} className="mx-auto mt-8 max-w-md text-muted-foreground">Reservá en tu plataforma habitual. La disponibilidad, las tarifas y el pago se gestionan allí.</Reveal>
         <Reveal delay={200} className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <Magnetic><Link to="/reservas" hash="airbnb" className="btn-solid">Reservar en Airbnb</Link></Magnetic>
-          <Magnetic><a href="https://www.booking.com/searchresults.es.html?ss=Barricas%20de%20Cafayate%2C%20Cafayate%2C%20Salta%2C%20Argentina" target="_blank" rel="noopener noreferrer" className="btn-ghost">Buscar en Booking <ArrowUpRight className="h-4 w-4" strokeWidth={1.25} /></a></Magnetic>
+          <Magnetic><a href={site.bookingUrl || site.bookingSearchUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">{site.bookingUrl ? "Reservar en Booking" : "Buscar en Booking"} <ArrowUpRight className="h-4 w-4" strokeWidth={1.25} /></a></Magnetic>
           <Link to="/contacto" className="link-line label-meta ml-2">Hacer una consulta</Link>
         </Reveal>
       </div>
