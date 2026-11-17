@@ -3,7 +3,6 @@ import { useState } from "react";
 import { ArrowDown, ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { accommodations, site } from "@/data/site";
 import { img } from "@/data/media";
-import { Reveal } from "@/components/site/Reveal";
 import { Magnetic, Split } from "@/components/site/Fx";
 
 const bookingHref = site.bookingUrl || site.bookingSearchUrl;
