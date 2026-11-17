@@ -27,7 +27,7 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
       const t = reduce ? 1 : clamp(-r.top / total);
       const open = ease((t - 0.06) / 0.28);
       const enter = ease((t - 0.3) / 0.58);
-      const radius = 18 + enter * 170;
+      const radius = (videoSrc ? 0 : 18) + enter * (videoSrc ? 188 : 170);
       const intro = 1 - clamp(t / 0.16);
       const middle = clamp((t - 0.18) / 0.08) * (1 - clamp((t - 0.43) / 0.1));
       const final = clamp((t - 0.72) / 0.18);
@@ -88,7 +88,7 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
         "--entry": 0,
         "--open": 0,
         "--enter": 0,
-        "--radius": "18vmin",
+        "--radius": videoSrc ? "0vmin" : "18vmin",
         "--intro": 1,
         "--middle": 0,
         "--final": 0,
