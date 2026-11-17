@@ -9,6 +9,7 @@ import { VideoFrame } from "@/components/site/VideoFrame";
 import { SectionIndex } from "@/components/site/SectionIndex";
 import { Marquee, Split, Magnetic } from "@/components/site/Fx";
 import { Tour } from "@/components/site/Tour";
+import { ImmersiveEntry } from "@/components/site/ImmersiveEntry";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -265,6 +266,7 @@ function Home() {
     <>
       <Hero />
       <Manifesto />
+      <ImmersiveEntry exterior={img.exteriorBarrica} interior={img.rosadoCamas} />
       <Signature />
       <Tour heading="Caminá por las barricas." stops={tourStops} />
       <Units />
