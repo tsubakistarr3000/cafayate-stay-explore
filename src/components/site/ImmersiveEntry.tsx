@@ -13,6 +13,8 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
   const wrap = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [active, setActive] = useState(0);
+  const [videoFailed, setVideoFailed] = useState(false);
+  const hasVideo = Boolean(videoSrc) && !videoFailed;
 
   useEffect(() => {
     const w = wrap.current;
