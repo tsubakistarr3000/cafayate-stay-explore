@@ -203,6 +203,8 @@
 .animate-marquee { animation: marquee 40s linear infinite; }
 .page-enter { animation: pageEnter 0.9s var(--ease-editorial) both; }
 @keyframes pageEnter { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.entry-scroll { height: 340svh; }
+.entry-door { backface-visibility: hidden; transform-style: preserve-3d; }
 
 @keyframes kenburns { from { transform: scale(1.06); } to { transform: scale(1); } }
 .animate-kenburns { animation: kenburns 9s var(--ease-editorial) forwards; }
@@ -213,4 +215,5 @@
   .reveal, .reveal-img { opacity: 1; transform: none; clip-path: none; transition: none; }
   .animate-kenburns, .animate-scrollline, .animate-marquee, .page-enter { animation: none; }
   .split-word > span, .reveal-img > img { transform: none; }
+  .entry-scroll { height: 100svh; }
 }
