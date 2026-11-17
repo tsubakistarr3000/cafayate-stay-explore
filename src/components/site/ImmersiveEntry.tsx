@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, DoorOpen } from "lucide-react";
 import type { Photo } from "@/data/media";
@@ -93,7 +93,7 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
         "--middle": 0,
         "--final": 0,
         "--door-opacity": 1,
-      } as React.CSSProperties}
+      } as CSSProperties}
     >
       <div className="sticky top-0 h-svh min-h-[560px] overflow-hidden">
         <div className="absolute inset-0" style={{ transform: "scale(calc(1 + var(--enter) * 0.22))", opacity: "calc(1 - var(--enter) * 0.72)" }}>
