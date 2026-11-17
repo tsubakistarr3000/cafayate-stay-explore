@@ -43,13 +43,14 @@ function Reservas() {
           ))}
         </div>
         <div className="hero-shade absolute inset-0" />
+        <div className="absolute inset-0 bg-charcoal/15 bg-linear-to-r from-charcoal/45 via-charcoal/5 to-transparent" />
         <p aria-hidden="true" className="display-sans pointer-events-none absolute -right-[0.04em] top-[12%] text-[38vw] leading-none text-on-dark/5 md:text-[28vw]">{selected.displayNumber}</p>
 
         <div className="container-editorial relative flex min-h-svh flex-col pb-8 pt-28 md:pb-12 md:pt-36">
           <p className="label-meta animate-in fade-in slide-in-from-bottom-3 duration-1000">Reservas · Barricas de Cafayate</p>
-          <Reveal as="h1" className="display-serif mt-6 max-w-5xl text-[clamp(52px,8vw,128px)]">
+          <h1 className="display-serif is-in mt-6 max-w-5xl text-[clamp(52px,8vw,128px)]">
             <Split>{"Elegí tu próxima\nhistoria."}</Split>
-          </Reveal>
+          </h1>
 
           <div className="mt-auto grid items-end gap-10 pt-16 md:grid-cols-12">
             <div className="md:col-span-5" aria-live="polite">
