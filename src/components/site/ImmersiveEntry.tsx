@@ -6,15 +6,18 @@ import type { Photo } from "@/data/media";
 const clamp = (n: number) => Math.min(1, Math.max(0, n));
 const ease = (n: number) => 1 - Math.pow(1 - clamp(n), 3);
 
-type Props = { exterior: Photo; interior: Photo; videoSrc?: string };
+type Props = { exterior: Photo; interior: Photo; videoSrc?: string; interiorVideoSrc?: string };
 
-/** Scroll-scrubbed threshold: a real exterior, a circular door and the real Rosado interior. */
-export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
+/** Scroll-scrubbed threshold: exterior footage, a circular mask and the Rosado interior. */
+export function ImmersiveEntry({ exterior, interior, videoSrc, interiorVideoSrc }: Props) {
   const wrap = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const interiorVideoRef = useRef<HTMLVideoElement>(null);
   const [active, setActive] = useState(0);
   const [videoFailed, setVideoFailed] = useState(false);
+  const [interiorVideoFailed, setInteriorVideoFailed] = useState(false);
   const hasVideo = Boolean(videoSrc) && !videoFailed;
+  const hasInteriorVideo = Boolean(interiorVideoSrc) && !interiorVideoFailed;
 
   useEffect(() => {
     const w = wrap.current;
@@ -29,7 +32,7 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
       const t = reduce ? 1 : clamp(-r.top / total);
       const open = ease((t - 0.06) / 0.28);
       const enter = ease((t - 0.3) / 0.58);
-      const radius = (videoSrc ? 0 : 18) + enter * (videoSrc ? 188 : 170);
+      const radius = (hasVideo ? 0 : 18) + enter * (hasVideo ? 188 : 170);
       const intro = 1 - clamp(t / 0.16);
       const middle = clamp((t - 0.18) / 0.08) * (1 - clamp((t - 0.43) / 0.1));
       const final = clamp((t - 0.72) / 0.18);
@@ -56,21 +59,31 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
           try { v.currentTime = target; } catch { /* The photo remains as fallback. */ }
         }
       }
+      const inner = interiorVideoRef.current;
+      if (inner && inner.readyState >= 1 && Number.isFinite(inner.duration)) {
+        const target = clamp((t - 0.32) / 0.62) * Math.max(0, inner.duration - 0.04);
+        if (Math.abs(inner.currentTime - target) > 0.035) {
+          try { inner.currentTime = target; } catch { /* The interior photo remains as fallback. */ }
+        }
+      }
     };
 
     const on = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); };
     const v = videoRef.current;
+    const inner = interiorVideoRef.current;
     tick();
     window.addEventListener("scroll", on, { passive: true });
     window.addEventListener("resize", on);
     v?.addEventListener("loadedmetadata", on);
+    inner?.addEventListener("loadedmetadata", on);
     return () => {
       window.removeEventListener("scroll", on);
       window.removeEventListener("resize", on);
       v?.removeEventListener("loadedmetadata", on);
+      inner?.removeEventListener("loadedmetadata", on);
       cancelAnimationFrame(raf);
     };
-  }, [videoSrc]);
+  }, [hasVideo, hasInteriorVideo]);
 
   const goTo = (progress: number) => {
     const w = wrap.current;
@@ -90,7 +103,7 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
         "--entry": 0,
         "--open": 0,
         "--enter": 0,
-        "--radius": videoSrc ? "0vmin" : "18vmin",
+        "--radius": hasVideo ? "0vmin" : "18vmin",
         "--intro": 1,
         "--middle": 0,
         "--final": 0,
@@ -100,7 +113,7 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
       <div className="sticky top-0 h-svh min-h-[560px] overflow-hidden">
         <div className="absolute inset-0" style={{ transform: "scale(calc(1 + var(--enter) * 0.22))", opacity: "calc(1 - var(--enter) * 0.72)" }}>
           <img src={exterior.src} alt={exterior.alt} className="absolute inset-0 h-full w-full object-cover" />
-          {videoSrc && (
+          {hasVideo && (
             <video
               ref={videoRef}
               src={videoSrc}
@@ -110,23 +123,33 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
               preload="auto"
               aria-label="La puerta de madera se abre y la cámara avanza hacia la entrada"
               className="absolute inset-0 h-full w-full object-cover"
-              onError={(e) => { e.currentTarget.style.display = "none"; }}
+              onError={() => setVideoFailed(true)}
             />
           )}
         </div>
-        <div className="absolute inset-0 bg-charcoal/25" style={{ opacity: "calc(0.35 + var(--enter) * 0.65)" }} />
+        <div className="absolute inset-0 bg-charcoal/45" style={{ opacity: "calc(0.7 + var(--enter) * 0.3)" }} />
 
         <div className="absolute inset-0 will-change-[clip-path]" style={{ clipPath: "circle(var(--radius) at 50% 48%)" }}>
-          <img
-            src={interior.src}
-            alt={interior.alt}
-            className="h-full w-full object-cover will-change-transform"
-            style={{ transform: "scale(calc(1.32 - var(--enter) * 0.32))", objectPosition: "50% 54%" }}
-          />
+          <div className="absolute inset-0 will-change-transform" style={{ transform: "scale(calc(1.32 - var(--enter) * 0.32))" }}>
+            <img src={interior.src} alt={interior.alt} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: "50% 54%" }} />
+            {hasInteriorVideo && (
+              <video
+                ref={interiorVideoRef}
+                src={interiorVideoSrc}
+                poster={interior.src}
+                muted
+                playsInline
+                preload="auto"
+                aria-label="La cámara avanza dentro de la habitación Rosado"
+                className="absolute inset-0 h-full w-full object-cover"
+                onError={() => setInteriorVideoFailed(true)}
+              />
+            )}
+          </div>
           <div className="absolute inset-0 bg-linear-to-t from-charcoal/70 via-transparent to-charcoal/10" />
         </div>
 
-        {!videoSrc && (
+        {!hasVideo && (
           <div
             className="entry-door absolute left-1/2 top-[48%] overflow-hidden rounded-full border border-paper/25 bg-wine will-change-transform"
             style={{
@@ -155,7 +178,7 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
           className={`container-editorial absolute inset-x-0 top-0 flex h-full flex-col justify-between py-24 md:py-28 ${active === 0 ? "pointer-events-auto" : "pointer-events-none"}`}
           style={{ opacity: "var(--intro)", transform: "translateY(calc(var(--entry) * -80px))" }}
         >
-          <p className="label-meta opacity-75">Un recorrido inmersivo · Fotos reales</p>
+          <p className="label-meta opacity-75">Video creado a partir de tus fotos</p>
           <div className="max-w-3xl">
             <p className="label-meta mb-5 text-clay">El umbral</p>
             <h2 className="display-serif text-[clamp(46px,8vw,116px)]">Del otro lado,<br /><span className="font-light italic">tu barrica.</span></h2>
@@ -167,14 +190,14 @@ export function ImmersiveEntry({ exterior, interior, videoSrc }: Props) {
         </div>
 
         <div className="pointer-events-none absolute inset-x-0 top-[22%] text-center" style={{ opacity: "var(--middle)" }}>
-          <p className="label-meta text-clay">La madera se abre</p>
+          <p className="label-meta text-on-dark/75">La madera se abre</p>
           <p className="display-serif mt-3 text-4xl md:text-6xl">Cruzá el umbral.</p>
         </div>
 
         <div className={`container-editorial absolute inset-x-0 bottom-0 pb-16 md:pb-20 ${active === 2 ? "pointer-events-auto" : "pointer-events-none"}`} style={{ opacity: "var(--final)" }}>
           <div className="grid items-end gap-8 md:grid-cols-12">
             <div className="md:col-span-7">
-              <p className="label-meta mb-4 text-clay">Interior real de Rosado</p>
+              <p className="label-meta mb-4 text-on-dark/75">Rosado · Interior</p>
               <h2 className="display-serif text-[clamp(48px,8vw,112px)]">Ya estás<br /><span className="font-light italic">adentro.</span></h2>
             </div>
             <div className="md:col-span-4 md:col-start-9">
