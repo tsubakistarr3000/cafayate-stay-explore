@@ -34,8 +34,6 @@ import cieloNoche from "@/assets/photos/cielo-noche.jpg.asset.json";
 import vAereoRocas from "@/assets/videos/cafayate-aereo-rocas.mp4.asset.json";
 import vQuebradaPaisaje from "@/assets/videos/quebrada-paisaje.mp4.asset.json";
 import vQuebradaAereo from "@/assets/videos/quebrada-aereo.mp4.asset.json";
-import vEntradaBarrica from "@/assets/videos/entrada-barrica.mp4.asset.json";
-import vInteriorRosado from "@/assets/videos/interior-rosado.mp4.asset.json";
 
 export type Photo = { src: string; alt: string };
 const p = (a: { url: string }, alt: string): Photo => ({ src: a.url, alt });
@@ -80,6 +78,4 @@ export const video = {
   aereoRocas: vAereoRocas.url,
   quebradaPaisaje: vQuebradaPaisaje.url,
   quebradaAereo: vQuebradaAereo.url,
-  entradaBarrica: vEntradaBarrica.url,
-  interiorRosado: vInteriorRosado.url,
 };

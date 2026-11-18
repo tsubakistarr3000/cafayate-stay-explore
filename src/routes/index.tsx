@@ -266,7 +266,7 @@ function Home() {
     <>
       <Hero />
       <Manifesto />
-      <ImmersiveEntry exterior={img.exteriorBarrica} interior={img.rosadoCamas} videoSrc={video.entradaBarrica} interiorVideoSrc={video.interiorRosado} />
+      <ImmersiveEntry exterior={img.exteriorBarrica} interior={img.rosadoCamas} />
       <Signature />
       <Tour heading="Caminá por las barricas." stops={tourStops} />
       <Units />
